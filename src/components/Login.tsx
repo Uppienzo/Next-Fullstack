@@ -27,8 +27,7 @@ export const LoginForm = () => {
           validationSchema={validationSchema}
           onSubmit={(values, { setFieldError }) => {
             if (values.username === "user" && values.password === "password") {
-              localStorage.setItem("token", "dummytoken");
-              router.push("/");
+              router.push("/insurance-select");
             } else {
               setFieldError("password", "Invalid username or password");
             }
