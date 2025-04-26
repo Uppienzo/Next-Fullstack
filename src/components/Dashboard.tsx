@@ -1,26 +1,50 @@
 "use client";
 
-import Sidebar from "@/components/Sidebar";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import Sidebar from '@/components/Sidebar';
+import ClaimsProcess from '@/components/knowledge-guide/ClaimsProcess';
+import ClaimsFlow from '@/components/knowledge-guide/ClaimsFlow';
+import FAQ from '@/components/knowledge-guide/FAQ';
+import PhotoUploadGuidelines from '@/components/knowledge-guide/PhotoUploadGuidelines';
+import ClaimsForm from '@/components/claims/ClaimsForm';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
-export const Dashboard = () => {
+interface DashboardProps {
+  setComponent: (component: string) => void;
+}
+export const Dashboard: React.FC<DashboardProps> = ({ setComponent }) => {
   const router = useRouter();
+  const [activeComponent, setActiveComponent] = useState<string | null>('welcome');
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    router.push("/login");
+    localStorage.removeItem('token');
+    router.push('/login');
   };
 
+  const handleSidebarItemClick = (componentName: string) => {
+    setActiveComponent(componentName);
+  };
+
+
   return (
-    <div className="flex h-screen bg-secondary">
-      <Sidebar />
-      <div className="flex flex-col items-center justify-center flex-1">
-        <h1 className="text-2xl font-semibold mb-4">Welcome to the Dashboard!</h1>
-        <p className="text-gray-600 mb-4">You are now logged in.</p>
-        <Button variant="destructive" onClick={handleLogout}>
+    <div className='flex h-screen bg-secondary '>
+      <Sidebar onItemClick={handleSidebarItemClick} />
+      <div className='flex-1 p-8 relative'>
+        <Button variant='destructive' onClick={handleLogout} className='absolute top-4 right-4'>
           Logout
         </Button>
+        {activeComponent === 'welcome' && (
+          <div className='mt-8'>
+            <h1 className='text-2xl font-bold'>Welcome to the Dashboard!</h1>
+            <p>Select an option from the sidebar to get started.</p>
+          </div>
+        )}
+        {activeComponent === 'claims-process' && <ClaimsProcess />}
+        {activeComponent === 'claims-flow' && <ClaimsFlow />}
+        {activeComponent === 'faq' && <FAQ />}
+        {activeComponent === 'photo-upload' && <PhotoUploadGuidelines />}
+        {activeComponent === 'claims-form' && <ClaimsForm setComponent={setActiveComponent}/>}
       </div>
     </div>
   );

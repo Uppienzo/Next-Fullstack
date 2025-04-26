@@ -1,6 +1,6 @@
 // src/components/Sidebar.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -8,68 +8,60 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Link from "next/link";
-const Sidebar = () => {
-  const [activeItem, setActiveItem] = useState<string | null>(null);
+import { useRouter, usePathname } from "next/navigation";
 
-  const handleClick = (item: string) => {
-    setActiveItem(item);
-  };
+interface SidebarLink {
+  label: string;
+  href: string;
+  children?: SidebarLink[];
+}
 
+interface SidebarProps {
+  onItemClick: (href: string) => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onItemClick }) => {
+  
   return (
-    <aside className="w-64 bg-gray-100 p-4">
+    <aside className="w-64 bg-gray-100 p-4 h-full">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="knowledge-guide">
           <AccordionTrigger>Knowledge Guide</AccordionTrigger>
           <AccordionContent>
-            <ul className="space-y-2 mt-2">
-              <li>
-                <Link
+            <ul className="space-y-1 mt-2">
+              <li onClick={() => onItemClick("claims-process")}>
+                <a
                   href="#"
                   className={`block px-4 py-2 rounded-md hover:bg-gray-200 ${
-                    activeItem === "claims-process"
-                      ? "bg-gray-200 font-semibold"
-                      : ""
+                    ""
                   }`}
-                  onClick={() => handleClick("claims-process")}
                 >
                   Claims Process
-                </Link>
-                
+                </a>
               </li>
-              <li>
-                <Link
+              <li onClick={() => onItemClick("claims-flow")}>
+                <a
                   href="#"
-                  className={`block px-4 py-2 rounded-md hover:bg-gray-200 ${
-                    activeItem === "claims-flow"
-                      ? "bg-gray-200 font-semibold"
-                      : ""
-                  }`}
-                  onClick={() => handleClick("claims-flow")}
+                  className={`block px-4 py-2 rounded-md hover:bg-gray-200`}
                 >
                   Claims Flow
-                </Link>
+                </a>
               </li>
-              <li>
-                <Link
+              <li onClick={() => onItemClick("faq")}>
+                <a
                   href="#"
-                  className={`block px-4 py-2 rounded-md hover:bg-gray-200 ${
-                    activeItem === "faq" ? "bg-gray-200 font-semibold" : ""
-                  }`}
-                  onClick={() => handleClick("faq")}
+                  className={`block px-4 py-2 rounded-md hover:bg-gray-200`}
                 >
                   FAQ
-                </Link>
+                </a>
               </li>
-              <li>
-              <Link
+              <li onClick={() => onItemClick("photo-upload")}>
+              <a
                   href="#"
-                  className={`block px-4 py-2 rounded-md hover:bg-gray-200 ${
-                    activeItem === "photo-upload" ? "bg-gray-200 font-semibold" : ""
-                  }`}
-                  onClick={() => handleClick("photo-upload")}
+                  className={`block px-4 py-2 rounded-md hover:bg-gray-200`}
                 >
                   Photo Upload Guidelines
-                </Link>
+                </a>
               </li>
             </ul>
           </AccordionContent>
@@ -79,27 +71,21 @@ const Sidebar = () => {
       <ul className="mt-4 space-y-2">
         <li>
           <Link
-            href="#"
-            className={`block px-4 py-2 rounded-md hover:bg-gray-200 ${
-              activeItem === "file-a-claim" ? "bg-gray-200 font-semibold" : ""
-            }`}
-            onClick={() => handleClick("file-a-claim")}
+            href="#"            
+            className={`block px-4 py-2 rounded-md hover:bg-gray-200`}
+            onClick={() => onItemClick("file-a-claim")}
           >
             File a Claim
           </Link>
           <ul className="ml-4 mt-2 space-y-2">
             <li>
-              <Link
-                href="/dashboard/claims-form"
-                className={`block px-4 py-2 rounded-md hover:bg-gray-200 ${
-                  activeItem === "claims-form"
-                    ? "bg-gray-200 font-semibold"
-                    : ""
-                }`}
-                onClick={() => handleClick("claims-form")}
-              >
-                Claims Form
-              </Link>
+              <a
+                  href="#"
+                  className={`block px-4 py-2 rounded-md hover:bg-gray-200`}
+                  onClick={() => onItemClick("claims-form")}
+                >
+                  Claims Form
+                </a>
             </li>
           </ul>
         </li>
