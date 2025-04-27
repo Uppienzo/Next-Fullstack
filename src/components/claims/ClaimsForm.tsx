@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -21,6 +22,8 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
   const [selectedTeeth, setSelectedTeeth] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [xrayFiles, setXrayFiles] = useState<File[]>([]);
+
+  const currentDate = new Date().toLocaleDateString('en-GB');
 
   const handleToothClick = (toothNumber: string) => {
     if (selectedTeeth.includes(toothNumber)) {
@@ -52,7 +55,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
     examDate: Yup.date().required("Required"),
     chiefComplaint: Yup.string().required("Required"),
     diagnosis: Yup.string().required("Required"),
-    procedureDescription: Yup.string().required("Required"),
+    procedureDescription: Yup.string().required("Description is required"),
     opdFile: Yup.mixed().test(
       "fileFormat",
       "Unsupported Format",
@@ -67,6 +70,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
     others: Yup.mixed().test(
       "fileFormat",
       "Unsupported Format",
+      
       (value: any) => !value || ['application/pdf', 'image/jpeg', 'image/png'].includes(value.type)
     ),
   });
@@ -124,7 +128,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
             onSubmit={handleSubmit}
           >{({ isSubmitting, setFieldValue, errors, touched }) => (
             <Form className="space-y-6">
-              {/* Patient Information */}
+              {/* Patient Information */}            
               <section className="space-y-4">
                 <h2 className="text-lg font-semibold">Patient Information</h2>
                 <div>
@@ -133,7 +137,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                   </Label>
                   <Field
                     as={Input}
-                    type="text"
+                     type="text"
                     id="patientName"
                     name="patientName"
                     className="w-full"
@@ -144,7 +148,8 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                <div>
+
+                <div className="md:grid md:grid-cols-2 md:gap-4">
                   <Label htmlFor="patientDOB" className="block mb-1">
                     DOB (dd/mm/yyyy)
                   </Label>
@@ -161,7 +166,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                <div>
+                
                   <Label htmlFor="patientMobile" className="block mb-1">
                     Mobile Number
                   </Label>
@@ -178,7 +183,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                <div>
+               
                   <Label htmlFor="planType" className="block mb-1">
                     Plan Type
                   </Label>
@@ -195,7 +200,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                <div>
+                
                   <Label htmlFor="membershipNo" className="block mb-1">
                     Membership No.
                   </Label>
@@ -212,7 +217,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                <div>
+                
                   <Label htmlFor="policyNumber" className="block mb-1">
                     Policy Number
                   </Label>
@@ -228,6 +233,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     component="div"
                     className="text-red-500 text-sm"
                   />
+                  
                 </div>
               </section>
 
@@ -235,7 +241,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
               <section className="space-y-4">
                 <h2 className="text-lg font-semibold">Doctor Information</h2>
                 <div>
-                  <Label htmlFor="doctorName" className="block mb-1">
+                  <Label htmlFor="doctorName" className="block mb-1"> 
                     Doctor Name
                   </Label>
                   <Field
@@ -251,7 +257,8 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                 <div>
+
+                <div className="md:grid md:grid-cols-2 md:gap-4">
                   <Label htmlFor="clinicName" className="block mb-1">
                     Clinic Name
                   </Label>
@@ -268,7 +275,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                 <div>
+                
                   <Label htmlFor="clinicAddress" className="block mb-1">
                     Clinic Address
                   </Label>
@@ -285,7 +292,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                 <div>
+                
                   <Label htmlFor="clinicPhone" className="block mb-1">Clinic Phone Number</Label>
                   <Field as={Input} type="tel" name="clinicPhone" id="clinicPhone" className="w-full" />
                   <ErrorMessage name="clinicPhone" component="div" className="text-red-500 text-sm" />
@@ -295,7 +302,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
              {/* Procedure Information */}
               <section className="space-y-4">
                 <h2 className="text-lg font-semibold">Procedure Information</h2>
-                <div>
+                <div className="md:grid md:grid-cols-2 md:gap-4">
                   <Label htmlFor="examDate" className="block mb-1">
                     Date of Examination
                   </Label>
@@ -312,7 +319,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                <div>
+                
                   <Label htmlFor="chiefComplaint" className="block mb-1">
                     Chief Complaint & Main Symptoms
                   </Label>
@@ -324,7 +331,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                   />
                   <ErrorMessage name="chiefComplaint" component="div" className="text-red-500 text-sm" />
                 </div>
-                <div>
+                
                   <Label htmlFor="diagnosis" className="block mb-1">
                     Diagnosis
                   </Label>
@@ -336,7 +343,18 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                   />
                   <ErrorMessage name="diagnosis" component="div" className="text-red-500 text-sm" />
                 </div>
+                
+                <Label htmlFor="procedureDescription" className="block mb-1">
+                Description of Procedure (Clinical Notes) *
+                </Label>
+                <Field
+                as="textarea"
+                id="procedureDescription"
+                name="procedureDescription"
+                className="w-full border border-gray-300 rounded p-2"
+                />
                 <div>
+                <ErrorMessage name="procedureDescription" component="div" className="text-red-500 text-sm" />
                   <Label className="block mb-1">Tooth Number:</Label>
                   {/* Placeholder for Tooth Chart - Replace with actual chart */}
                   <div className="grid grid-cols-6 gap-2">
@@ -352,6 +370,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     ))}
                   </div>
                   {selectedTeeth.length > 0 && <p className="mt-2">Selected Teeth: {selectedTeeth.join(", ")}</p>}
+                </div>
                 </div>
               </section>
 
@@ -493,9 +512,26 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                   </div>
                 </section>
 
+                <div className="flex items-center space-x-2">
+                <Field
+                as={Checkbox}
+                id="terms"
+                name="terms"
+                className="rounded-sm border-gray-300 text-blue-500 focus:ring-blue-500"
+                />
+                <Label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                By submitting this form electronically, I confirm that all information provided is accurate and complete to the best of my knowledge. I acknowledge that any false or misleading information may result in denial of the claim and potential further action. I also consent to the use of electronic communication for updates and correspondence regarding this claim
+                </Label>
+                </div>
+                <div className="flex items-center justify-between">
+                <div className="text-sm text-gray-500">
+                Date: {currentDate}
+                </div>
+                
               <Button type="submit" className="bg-primary">
                 Submit
               </Button>
+              </div>
             </Form>
           )}
       </Formik>
@@ -511,7 +547,6 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
             <Button onClick={handleCloseModal}>Close</Button>
           </DialogClose>
       </DialogContent>
-    </Dialog>
     </>
   );
 };

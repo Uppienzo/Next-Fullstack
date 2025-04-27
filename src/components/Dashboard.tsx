@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from '@/components/Sidebar';
+import Sidebar from "@/components/Sidebar";
 import ClaimsProcess from '@/components/knowledge-guide/ClaimsProcess';
 import ClaimsFlow from '@/components/knowledge-guide/ClaimsFlow';
 import FAQ from '@/components/knowledge-guide/FAQ';
@@ -28,9 +28,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ setComponent }) => {
 
 
   return (
-    <div className='flex h-screen bg-secondary '>
-      <Sidebar onItemClick={handleSidebarItemClick} />
-      <div className='flex-1 p-8 relative'>
+    <div className='flex h-screen bg-secondary overflow-hidden'>
+      <div className="w-64 shrink-0">
+        <Sidebar onItemClick={handleSidebarItemClick} />
+      </div>
+      <div className='flex-1 p-8 relative overflow-y-auto'>
         <Button variant='destructive' onClick={handleLogout} className='absolute top-4 right-4'>
           Logout
         </Button>
