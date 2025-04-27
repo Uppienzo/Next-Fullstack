@@ -153,24 +153,24 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     />
                   </div>
 
-                  <div className="md:grid md:grid-cols-2 md:gap-4">
-
-                    <Label htmlFor="patientDOB" className="block mb-1">
-                      DOB (dd/mm/yyyy)
-                    </Label>
-                    <Field
-                      as={Input}
-                      type="date"
-                      id="patientDOB"
-                      name="patientDOB"
-                      className="w-full"
-                    />
-                    <ErrorMessage
-                      name="patientDOB"
-                      component="div"
-                      className="text-red-500 text-sm"
-                    />
-
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="patientDOB" className="block mb-1">
+                        DOB (dd/mm/yyyy)
+                      </Label>
+                      <Field
+                        as={Input}
+                        type="date"
+                        id="patientDOB"
+                        name="patientDOB"
+                        className="w-full"
+                      />
+                      <ErrorMessage
+                        name="patientDOB"
+                        component="div"
+                        className="text-red-500 text-sm"
+                      />
+                    </div>
 
 
                     <div>
@@ -189,7 +189,8 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                         component="div"
                         className="text-red-500 text-sm"
                       />
-                    </div></div>
+                    </div>
+                  </div>
 
                   <div>
 
@@ -272,7 +273,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                   />
                 </div>
 
-                <div className="md:grid md:grid-cols-2 md:gap-4">
+                <div>
                   <Label htmlFor="clinicName" className="block mb-1">
                     Clinic Name
                   </Label>
@@ -316,7 +317,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
               <div>
                 <section className="space-y-4">
                   <h2 className="text-lg font-semibold">Procedure Information</h2>
-                  <div className="md:grid md:grid-cols-2 md:gap-4">
+                  <div>
                     <Label htmlFor="examDate" className="block mb-1">
                       Date of Examination
                     </Label>
