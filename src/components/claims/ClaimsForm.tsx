@@ -99,7 +99,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
 
   return (
     <>
-      <Formik
+       <Formik
         initialValues={{
 
           patientName: "",
@@ -409,7 +409,6 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     onChange={(e) => handleOPDFileChange(e, setFieldValue)}
                   />
                   <ErrorMessage name="opdFile" component="div" className="text-red-500 text-sm" />
-                  {touched.opdFile && errors.opdFile && <div className="text-red-500">{errors.opdFile}</div>}
                 </div>
 
                 {/* Full Face */}
@@ -424,7 +423,6 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     onChange={(e) => handleSingleFileUpload(e, "fullFace", setFieldValue)}
                   />
                   <ErrorMessage name="fullFace" component="div" className="text-red-500 text-sm" />
-                  {touched.fullFace && errors.fullFace && <div className="text-red-500">{errors.fullFace}</div>}
                 </div>
 
                 {/* Frontal */}
@@ -439,7 +437,6 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     onChange={(e) => handleSingleFileUpload(e, "frontal", setFieldValue)}
                   />
                   <ErrorMessage name="frontal" component="div" className="text-red-500 text-sm" />
-                  {touched.frontal && errors.frontal && <div className="text-red-500">{errors.frontal}</div>}
                 </div>
 
                 {/* Upper Occlusal */}
@@ -454,7 +451,6 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     onChange={(e) => handleSingleFileUpload(e, "upperOcclusal", setFieldValue)}
                   />
                   <ErrorMessage name="upperOcclusal" component="div" className="text-red-500 text-sm" />
-                  {touched.upperOcclusal && errors.upperOcclusal && <div className="text-red-500">{errors.upperOcclusal}</div>}
                 </div>
 
                 {/* Lower Occlusal */}
@@ -469,7 +465,6 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     onChange={(e) => handleSingleFileUpload(e, "lowerOcclusal", setFieldValue)}
                   />
                   <ErrorMessage name="lowerOcclusal" component="div" className="text-red-500 text-sm" />
-                  {touched.lowerOcclusal && errors.lowerOcclusal && <div className="text-red-500">{errors.lowerOcclusal}</div>}
                 </div>
 
                 {/* Problem Area (post-treatment) */}
@@ -484,7 +479,6 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     onChange={(e) => handleSingleFileUpload(e, "problemArea", setFieldValue)}
                   />
                   <ErrorMessage name="problemArea" component="div" className="text-red-500 text-sm" />
-                  {touched.problemArea && errors.problemArea && <div className="text-red-500">{errors.problemArea}</div>}
                 </div>
 
                 {/* X-ray Upload */}
@@ -500,7 +494,6 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     onChange={(e) => handleXrayUpload(e, setFieldValue)}
                   />
                   <ErrorMessage name="xrayUpload" component="div" className="text-red-500 text-sm" />
-                  {touched.xrayUpload && errors.xrayUpload && <div className="text-red-500">{errors.xrayUpload}</div>}
 
                   {/* Display selected X-ray files */}
                   {xrayFiles.length > 0 && (
@@ -527,7 +520,6 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     onChange={(e) => handleSingleFileUpload(e, "others", setFieldValue)}
                   />
                   <ErrorMessage name="others" component="div" className="text-red-500 text-sm" />
-                  {touched.others && errors.others && <div className="text-red-500">{errors.others}</div>}
                 </div>
               </section >
 
@@ -555,6 +547,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
           </>
         )}
       </Formik>
+
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
