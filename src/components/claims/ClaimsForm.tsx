@@ -129,8 +129,8 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting, setFieldValue, errors, touched }) => (
-          <Form>
-            <div className="space-y-6">
+          <>
+            <Form className="space-y-6">
               {/* Patient Information */}
               <section className="space-y-4">
                 <div>
@@ -345,7 +345,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                     />
                     <ErrorMessage name="chiefComplaint" component="div" className="text-red-500 text-sm" />
                   </div>
-                </div>
+                </section>
 
                 <div>
                   <Label htmlFor="diagnosis" className="block mb-1">
@@ -389,7 +389,7 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
                   </div>
                   {selectedTeeth.length > 0 && <p className="mt-2">Selected Teeth: {selectedTeeth.join(", ")}</p>}
                 </div>
-              </section>
+              </div>
 
 
               {/* Uploads Section */}
@@ -550,10 +550,9 @@ const ClaimsForm: React.FC<ClaimsFormProps> = ({ setActiveComponent }) => {
               <Button type="submit" className="bg-primary">
                 Submit
               </Button>
-            </div>
-          </Form>
+            </Form>
+          </>
         )}
-
       </Formik>
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="sm:max-w-[425px]">
